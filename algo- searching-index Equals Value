@@ -18,3 +18,53 @@ When you encounter a value that's equal to its index, you' ll have to perform  s
 
 Optimal Space Time Complexity
 O (log (n)) time O (1) space-where n is the length of the input array
+
+
+#O(logN)|O(logn)
+def indexEqualsValue(array):
+	return indexEqualsValueHelper(array, 0, len(array) - 1)
+
+def indexEqualsValueHelper(array, leftIndex, rightIndex):
+	if leftIndex > rightIndex:
+		return -1
+	
+	middleIndex = leftIndex + (rightIndex -leftIndex)//2
+	middleValue = array[middleIndex]
+	
+	if middleValue < middleIndex:
+		return indexEqualsValueHelper(array, middleIndex + 1, rightIndex)
+	elif middleValue == middleIndex and middleIndex == 0:
+		return middleIndex
+	elif middleValue == middleIndex and array[middleIndex - 1] < middleIndex - 1:
+		return middleIndex
+	else:
+		return indexEqualsValueHelper(array, leftIndex, middleIndex - 1)
+
+
+#O(log(n))|O(1)
+def indexEqualsValue(array):
+	leftIndex = 0
+	rightIndex = len(array) - 1
+	
+	while leftIndex <= rightIndex:
+		middleIndex = leftIndex + (rightIndex - leftIndex)//2
+		middleValue = array[middleIndex]
+		
+		if middleValue < middleIndex:
+			leftIndex = middleIndex + 1
+		elif middleValue == middleIndex and middleIndex ==0:
+			return middleIndex
+		elif middleValue == middleIndex and array[middleIndex - 1] < middleIndex - 1:
+			return middleIndex
+		else:
+			rightIndex = middleIndex - 1
+	return -1
+
+
+#o(n) time| O(1)
+def indexEqualsValue(array):
+	for index in range(len(array)):
+		value = array[index]
+		if index == value:
+			return index
+	return -1
